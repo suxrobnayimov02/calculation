@@ -8,7 +8,7 @@
     <div class="is-category">
       <div class="category-items d-flex">
         <div class="category-filter" v-for="category in categories" :key="category.id">
-          <el-button :type="category == 1 ? 'primary' : 'success'" class="active_category" v-on:click="filter(category)">
+          <el-button :type="category.id !== '' ? 'primary' : 'success'" class="active_category" v-on:click="filter(category)">
             {{ category.name }}
           </el-button>
         </div>
@@ -45,9 +45,10 @@ export default {
         basket_products: basket_products,
         categories: categories,
         allProducts: products,
-        isActive: true,
+        isActive: '',
 			}
 		},
+
 		methods: {
 
       filter(category){
@@ -59,9 +60,6 @@ export default {
             return product.category_id == category.id;
           });
         }
-        
-
-        console.log(this.products)
       },
 
       addToCart(item) {
@@ -75,7 +73,7 @@ export default {
           item.summ = item.count*parseFloat(item.price.split(" ").join(""))
           this.basket_products.push(item)
         }
-      }
+      },
 		},
 }
 </script>

@@ -34,10 +34,9 @@
 					</el-col>
 					<el-col style="width: 64.2%;" class="add-number">
 						<el-input
-							type="text"
+							type="number"
 							placeholder="0"
 							v-model="calculationValue"
-							:format-price="formatPrice"
 							show-word-limit
 							class="input-number"
 						>
