@@ -48,7 +48,7 @@
                 <el-button type="success" size="small" icon="el-icon-discount" circle></el-button>
               </el-badge>
               <el-button type="primary" size="small" icon="el-icon-box" circle style="margin-left: 12px;"></el-button>
-              <el-input-number v-model="num" size="small" @change="handleChange" :min="0" :max="10" style="margin-left: 12px;"></el-input-number>
+              <el-input-number v-model="num" size="small" :min="0" :max="10" style="margin-left: 12px;"></el-input-number>
               <el-button type="danger" size="small" icon="el-icon-delete" circle style="margin-left: 20px;"></el-button>
             </el-col>
           </el-row>
@@ -58,16 +58,16 @@
         <div class="all-summ">
           <div class="d-flex justify-between price-all">
            <p>Обшая сумма </p>
-           <h4>8 910 UZS</h4>
+           <h4>{{ formatPrice(basket_products.reduce(function(sum, item) {return sum + item.summ; }, 0)) }} UZS</h4>
           </div>
           <div class="d-flex justify-between product-price">
            <p>Скидка </p>
-           <h4>{{ formatPrice() }} UZS</h4>
+           <h4>0 UZS</h4>
           </div>
           <div class="d-flex justify-between product-price">
            <p>Елементы</p>
-           <h4>2 UZS</h4>
-          </div>
+           <h4>{{formatPrice(basket_products.reduce(function(sum, item) {return sum + item.count; }, 0))}} </h4>
+          </div> 
           <div class="d-flex justify-between product-price">
            <p>Клиент</p>
            <h4>Виберите клиент</h4>
@@ -146,6 +146,9 @@
   
 <script>
 import { basket_products } from "@/data/myProducts";
+import { allSum } from "@/data/myProducts";
+import { allCount } from "@/data/myProducts";
+
 export default {
     // eslint-disable-next-line vue/multi-word-component-names
   name: 'Sidebar',
@@ -154,19 +157,30 @@ export default {
       activeIndex: '1',
       num: 1,
       generalDiscountModal: false,
-      productList: [],
-      basket_products: basket_products
+      allSum: allSum,
+      basket_products: basket_products, 
+      allCount: allCount
     }
   },
+
   methods: {
-    
-    handleChange(value) {
-      console.log(value)
-    },
     formatPrice(value) {
       const val = (value / 1).toFixed(0).replace(' ', ',')
       return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
     },
+    summ(){
+      let all_summ = 1
+      all_summ = basket_products.map(item => (item.count * item.price))
+      return all_summ;
+    },
+    countSumm() {
+      alert('Hello')
+      basket_products.map(function(item) {
+        this.allSum += (item.count *parseFloat(item.price.split(" ").join("")))
+        this.allCount += item.count 
+      });
+      return this.allSum
+    }
   }
 }
 </script>

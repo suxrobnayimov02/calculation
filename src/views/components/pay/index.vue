@@ -13,15 +13,15 @@
 						<div>
 							<div class="pay-summ">
 								<p>Обшая сумма</p>
-								<h4>8 910 UZS</h4>
+								<h4>{{formatPrice(basket_products.reduce(function(sum, item) {return sum + item.summ; }, 0)) }} UZS </h4>
 							</div>
 							<div class="pay-summ">
 								<p>Скидка</p>
-								<h4>8 910 UZS</h4>
+								<h4> 0 UZS</h4>
 							</div>
 							<div class="pay-summ">
 								<p>Елементы</p>
-								<h4>8 910 UZS</h4>
+								<h4> {{ basket_products.reduce(function(sum, item) {return sum + item.count; }, 0)}}</h4>
 							</div>
 							<div class="pay-summ">
 								<p>Клиент</p>
@@ -74,7 +74,7 @@
 			width="30%"
 			center
 			>
-			<h3 v-if="calculationValue >= 8910" style="text-align: center;">Сдача {{ formatPrice(calculationValue - 8910) }} UZS</h3>
+			<h3 v-if="calculationValue >= 8910" style="text-align: center;">Сдача {{ formatPrice(calculationValue - basket_products.reduce(function(sum, item) {return sum + item.summ; }, 0)) }} UZS</h3>
 			<h3 v-else style="text-align: center; color: #f56c6c;">Тўлов учун етарли сумма киритилмади</h3>
 			<span slot="footer" class="dialog-footer">
 				<el-button @click="centerDialogVisible = false">Отменить</el-button>
@@ -85,6 +85,7 @@
 </template>
 
 <script>
+import { basket_products } from "@/data/myProducts";
 export default {
 	// eslint-disable-next-line vue/multi-word-component-names
 	name: 'Pay',
@@ -93,7 +94,8 @@ export default {
 			centerDialogVisible: false,
 			number: '',
 			calculationValue: '',
-			calculationElement: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '.', '0']
+			calculationElement: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '.', '0'],
+			basket_products: basket_products
 		}
 	},
 	methods: {

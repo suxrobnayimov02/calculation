@@ -24,21 +24,6 @@ const routes = [
         component: () => import("@/views/components/all-category.vue"),
       },
       {
-        name: 'WaterSupply',
-        path: '/category/WaterSupply',
-        component: () => import("@/views/components/waterSupply.vue"),
-      },
-      {
-        name: 'ArmatureList',
-        path: '/category/ArmatureList',
-        component: () => import("@/views/components/list-armature.vue"),
-      },
-      {
-        name: 'SewageList',
-        path: '/category/SewageList',
-        component: () => import("@/views/components/list-sewage.vue"),
-      },
-      {
         name: 'CategoryPay',
         path: '/pay',
         component: () => import("@/views/components/pay/index.vue"),

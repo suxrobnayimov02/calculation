@@ -6,47 +6,19 @@
       </el-breadcrumb>
     </div>
     <div class="is-category">
-      <div class="category-items">
-        <router-link :to="{name: 'AllCategoryList'}">
-          <el-button :type="$route.name == 'AllCategoryList' ? 'success' : 'success'" class="active-category">
-            Все
+      <div class="category-items d-flex">
+        <div class="category-filter" v-for="category in categories" :key="category.id">
+          <el-button :type="category == 1 ? 'primary' : 'success'" class="active_category" v-on:click="filter(category)">
+            {{ category.name }}
           </el-button>
-        </router-link>
-        <div class="category-filter">
-          <router-link :to="{name: 'WaterSupply'}">
-            <el-button :type="$route.name == 'AllCategoryList' ? 'primary' : 'primary'" class="active-category">
-              Водоснабжения
-            </el-button>
-          </router-link>
-        </div>
-        <div class="category-filter">
-          <router-link :to="{name: 'ArmatureList'}">
-            <el-button :type="$route.name == 'AllCategoryList' ? 'primary' : 'primary'" class="active-category">
-              Фитинги
-            </el-button>
-          </router-link>
-        </div>
-        <div class="category-filter">
-          <router-link :to="{name: 'SewageList'}">
-            <el-button :type="$route.name == 'AllCategoryList' ? 'primary' : 'primary'" class="active-category">
-              Канализация
-            </el-button>
-          </router-link>
-        </div>
-        <div class="category-filter">
-          <div>
-            <el-button :type="$route.name == 'AllCategory4' ? '' : 'primary'" class="active-category">
-              Канализация2
-            </el-button>
-          </div>
         </div>
       </div>
       <el-row>
-        <el-col :span="6" class="category-list ml-5" v-for="item in data" :key="item.id">
+        <el-col :span="6" class="category-list ml-5" v-for="item in products" :key="item.id">
           <el-button style="text-align: left;padding: 0;" v-on:click="addToCart(item)">
             <div class="list-info">
               <p class="title">{{ item.product_name }}</p>
-              <h5 class="summ">{{ item.summ }} UZS</h5>
+              <h5 class="summ">{{ item.price }} UZS</h5>
               <h5 class="weight">{{ item.remainder }}</h5>
             </div>
             <el-progress v-if="item.percentage >= '75'" :text-inside="true" :stroke-width="24" :percentage="item.percentage" status="success"></el-progress>
@@ -60,25 +32,48 @@
 </template>
 
 <script>
-import { category } from "@/data/index";
+import { products } from "@/data/index";
+import { categories } from "@/data/index";
 import { basket_products } from "@/data/myProducts";
+
 export default {
     // eslint-disable-next-line vue/multi-word-component-names
-    name: "Category",
+    name: "Products",
     data() {
 			return {
-				data: category,
-        basket_products: basket_products
+				products: products,
+        basket_products: basket_products,
+        categories: categories,
+        allProducts: products,
+        isActive: true,
 			}
 		},
 		methods: {
+
+      filter(category){
+        
+        if(category.id == ""){
+          this.products = this.allProducts
+        }else {
+          this.products =  this.allProducts.filter(function(product){
+            return product.category_id == category.id;
+          });
+        }
+        
+
+        console.log(this.products)
+      },
+
       addToCart(item) {
-       let product = this.basket_products.find(basket_products => basket_products.id === item.id)
-        if(product){
-          product.count +=1
+
+       let bProduct = this.basket_products.find(basket_products => basket_products.id === item.id)
+        if(bProduct){
+          bProduct.count +=1
+          bProduct.summ = bProduct.count*parseFloat(bProduct.price.split(" ").join(""))
         }else{
-            item.count = 1
-            this.basket_products.push(item)
+          item.count = 1
+          item.summ = item.count*parseFloat(item.price.split(" ").join(""))
+          this.basket_products.push(item)
         }
       }
 		},
