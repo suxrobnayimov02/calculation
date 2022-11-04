@@ -80,7 +80,7 @@
         <div class="calculation-the-amount" style="padding: 10px;">
           <el-row :gutter="8">
             <el-col :span="8">
-              <el-button class="amount-btn-group">
+              <el-button class="amount-btn-group" @click="generalDiscountModal = true">
                 <p><i class="el-icon-discount" /></p>
                 Общая скидка 
               </el-button>
@@ -119,6 +119,28 @@
           </el-row>
         </div>
       </div>
+      <el-dialog
+        title="Общая скидка"
+        :visible.sync="generalDiscountModal"
+        width="30%"
+        center>
+        <div class="d-flex justify-between" style="padding: 5px 0;">
+          <p>Труба КАНАЛИЗАЦИЯ BASE Ø110</p> 
+          <p><b>5.7%</b></p>
+        </div>
+        <div class="d-flex justify-between">
+          <p>Насос канализационный погружной</p> 
+          <p><b>0.01%</b></p>
+        </div>
+        <div class="d-flex justify-between" style="padding: 5px 0;">
+          <p><b>Общая скидка</b></p> 
+          <p><b>0.28%</b></p>
+        </div>
+        <span slot="footer" class="dialog-footer">
+          <el-button @click="generalDiscountModal = false" type="danger">Отменить</el-button>
+          <el-button type="success" @click="generalDiscountModal = false">Сохранить</el-button>
+        </span>
+      </el-dialog>
     </div>
   </template>
   
@@ -132,7 +154,8 @@ export default {
       return {
         activeIndex: '1',
         num: 1,
-        data: myProducts
+        data: myProducts,
+        generalDiscountModal: false
       }
     },
     methods: {
