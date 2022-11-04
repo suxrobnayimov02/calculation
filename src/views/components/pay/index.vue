@@ -37,6 +37,7 @@
 							type="text"
 							placeholder="0"
 							v-model="calculationValue"
+							:format-price="formatPrice"
 							show-word-limit
 							class="input-number"
 						>

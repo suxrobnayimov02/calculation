@@ -62,7 +62,7 @@
           </div>
           <div class="d-flex justify-between product-price">
            <p>Скидка </p>
-           <h4>{{ formatPrice(121212) }} UZS</h4>
+           <h4>{{ formatPrice(data) }} UZS</h4>
           </div>
           <div class="d-flex justify-between product-price">
            <p>Елементы</p>
@@ -154,7 +154,8 @@ export default {
         activeIndex: '1',
         num: 1,
         data: myProducts,
-        generalDiscountModal: false
+        generalDiscountModal: false,
+        productList: []
       }
     },
     methods: {

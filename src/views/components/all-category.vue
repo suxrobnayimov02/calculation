@@ -43,7 +43,7 @@
       </div>
       <el-row>
         <el-col :span="6" class="category-list ml-5" v-for="item in data" :key="item.id">
-          <el-button style="text-align: left;padding: 0;" v-on:click="addToCart()">
+          <el-button style="text-align: left;padding: 0;" @click="addToCart()">
             <div class="list-info">
               <p class="title">{{ item.product_name }}</p>
               <h5 class="summ">{{ item.summ }} UZS</h5>
@@ -55,6 +55,9 @@
           </el-button>
         </el-col>
       </el-row>
+      <!-- <div v-for="item in weatherDataList" :key="item.id">
+        <p>{{ item.name }}</p>
+      </div> -->
     </div>
   </div>
 </template>
@@ -72,9 +75,8 @@ export default {
 		},
 		methods: {
       addToCart() {
-        fetch("index.js")
-        .then(response => response.json())
-        .then(data => (this.weatherDataList = data));
+        console.log('add to cart')
+        
       }
 		},
 }
