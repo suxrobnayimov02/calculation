@@ -43,7 +43,7 @@
       </div>
       <el-row>
         <el-col :span="6" class="category-list ml-5" v-for="item in data" :key="item.id">
-          <el-button style="text-align: left;padding: 0;" @click="addToCart()">
+          <el-button style="text-align: left;padding: 0;" v-on:click="addToCart(item)">
             <div class="list-info">
               <p class="title">{{ item.product_name }}</p>
               <h5 class="summ">{{ item.summ }} UZS</h5>
@@ -55,28 +55,31 @@
           </el-button>
         </el-col>
       </el-row>
-      <!-- <div v-for="item in weatherDataList" :key="item.id">
-        <p>{{ item.name }}</p>
-      </div> -->
     </div>
   </div>
 </template>
 
 <script>
 import { category } from "@/data/index";
+import { basket_products } from "@/data/myProducts";
 export default {
     // eslint-disable-next-line vue/multi-word-component-names
     name: "Category",
     data() {
 			return {
 				data: category,
-        weatherDataList: []
+        basket_products: basket_products
 			}
 		},
 		methods: {
-      addToCart() {
-        console.log('add to cart')
-        
+      addToCart(item) {
+       let product = this.basket_products.find(basket_products => basket_products.id === item.id)
+        if(product){
+          product.count +=1
+        }else{
+            item.count = 1
+            this.basket_products.push(item)
+        }
       }
 		},
 }

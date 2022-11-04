@@ -3,7 +3,7 @@
       <div class="shoping-list">
         <el-row class="sidebarmenu-link">
           <el-col :span="12">
-            <el-button :class="$route.name == 'basket' ? '' : 'primary'" class="basket-btn">
+            <el-button :class="$route.name == 'basket' ? '' : 'primary'" class="basket-btn basket_active">
               <p><i class="el-icon-shopping-bag-1" /></p>
               Корзина 
             </el-button>
@@ -20,7 +20,7 @@
           </el-col>
         </el-row>
         <el-table
-          :data="data"
+          :data="basket_products"
           stripe
           style="width: 100%">
           <el-table-column
@@ -28,7 +28,7 @@
             label="Наименование">
           </el-table-column>
           <el-table-column
-            prop="category_id"
+            prop="count"
             label="Кол">
           </el-table-column>
           <el-table-column
@@ -62,7 +62,7 @@
           </div>
           <div class="d-flex justify-between product-price">
            <p>Скидка </p>
-           <h4>{{ formatPrice(data) }} UZS</h4>
+           <h4>{{ formatPrice() }} UZS</h4>
           </div>
           <div class="d-flex justify-between product-price">
            <p>Елементы</p>
@@ -145,24 +145,21 @@
   </template>
   
 <script>
-import { myProducts } from '@/data/myProducts'
+import { basket_products } from "@/data/myProducts";
 export default {
     // eslint-disable-next-line vue/multi-word-component-names
-    name: 'Sidebar',
-    data() {
-      return {
-        activeIndex: '1',
-        num: 1,
-        data: myProducts,
-        generalDiscountModal: false,
-        productList: []
-      }
-    },
-    methods: {
-      getItem() {
-        fetch('@/data/index.js')
-        .then(response => response.json())
-      },
+  name: 'Sidebar',
+  data() {
+    return {
+      activeIndex: '1',
+      num: 1,
+      generalDiscountModal: false,
+      productList: [],
+      basket_products: basket_products
+    }
+  },
+  methods: {
+    
     handleChange(value) {
       console.log(value)
     },
@@ -178,5 +175,8 @@ export default {
 .el-icon-document, .el-icon-shopping-bag-1 {
   font-size: 22px;
   padding: 3px 0;
+}
+.basket_active {
+  background-color: #E0E1E2;
 }
 </style>

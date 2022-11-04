@@ -7,7 +7,8 @@ export const category = [
         price: '6 000',
         summ: '6 000',
         remainder: '12 шт',
-        percentage: 87.3
+        percentage: 87.3,
+        // count: 1
     },
     {
         id: 2,
@@ -16,7 +17,8 @@ export const category = [
         price: '126 000',
         summ: '120 850',
         remainder: '8 шт',
-        percentage: 0
+        percentage: 0,
+        // count: 1
     },
     {
         id: 3,
@@ -34,7 +36,7 @@ export const category = [
         price: '60 000',
         summ: '59 865',
         remainder: '17 шт',
-        percentage: 2
+        percentage: 12
     },
     {
         id: 5,
@@ -183,7 +185,7 @@ export const categoryWaterSupply = [
         price: '60 000',
         summ: '59 865',
         remainder: '17 шт',
-        percentage: 2
+        percentage: 12
     },
     {
         id: 5,
@@ -240,7 +242,7 @@ export const armature = [
         price: '12 300',
         summ: '12 000',
         remainder: '0 шт',
-        percentage: '12'
+        percentage: 12
     },
 ];
 

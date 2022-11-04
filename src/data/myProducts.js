@@ -1,1 +1,1 @@
-export const myProducts = []
+export const basket_products = []

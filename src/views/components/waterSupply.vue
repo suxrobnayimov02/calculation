@@ -48,7 +48,7 @@
 					v-for="item in waterSupply"
 					:key="item.id"
 				>
-					<el-button style="text-align: left; padding: 0">
+					<el-button style="text-align: left; padding: 0" v-on:click="addToCart(item)">
 						<div class="list-info">
 							<p class="title">{{ item.product_name }}</p>
 							<h5 class="summ">{{ item.summ }} UZS</h5>
@@ -85,15 +85,27 @@
 
 <script>
 import { categoryWaterSupply } from "@/data/index";
+import { basket_products } from "@/data/myProducts";
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "List",
   data() {
     return {
       waterSupply: categoryWaterSupply,
+      basket_products: basket_products
     };
   },
-  methods: {},
+  methods: {
+    addToCart(item) {
+      let product = this.basket_products.find(basket_products => basket_products.id === item.id)
+      if(product){
+        product.count +=1
+      }else{
+        item.count = 1
+        this.basket_products.push(item)
+      }
+    }
+  },
 };
 </script>
 
