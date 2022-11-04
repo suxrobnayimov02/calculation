@@ -73,7 +73,8 @@
 			width="30%"
 			center
 			>
-			<h3 style="text-align: center;">Сдача {{ formatPrice(calculationValue - 8910) }} UZS</h3>
+			<h3 v-if="calculationValue >= 8910" style="text-align: center;">Сдача {{ formatPrice(calculationValue - 8910) }} UZS</h3>
+			<h3 v-else style="text-align: center; color: #f56c6c;">Тўлов учун етарли сумма киритилмади</h3>
 			<span slot="footer" class="dialog-footer">
 				<el-button @click="centerDialogVisible = false">Отменить</el-button>
 				<el-button type="success" @click="centerDialogVisible = false">Сохранить</el-button>

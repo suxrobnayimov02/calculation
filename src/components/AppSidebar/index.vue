@@ -48,7 +48,7 @@
                 <el-button type="success" size="small" icon="el-icon-discount" circle></el-button>
               </el-badge>
               <el-button type="primary" size="small" icon="el-icon-box" circle style="margin-left: 12px;"></el-button>
-              <el-input-number v-model="num" size="small" @change="handleChange" :min="1" :max="10" style="margin-left: 12px;"></el-input-number>
+              <el-input-number v-model="num" size="small" @change="handleChange" :min="0" :max="10" style="margin-left: 12px;"></el-input-number>
               <el-button type="danger" size="small" icon="el-icon-delete" circle style="margin-left: 20px;"></el-button>
             </el-col>
           </el-row>
@@ -62,7 +62,7 @@
           </div>
           <div class="d-flex justify-between product-price">
            <p>Скидка </p>
-           <h4>{{ formatPrice(data) }} UZS</h4>
+           <h4>{{ formatPrice(121212) }} UZS</h4>
           </div>
           <div class="d-flex justify-between product-price">
            <p>Елементы</p>
@@ -149,7 +149,6 @@ import { myProducts } from '@/data/myProducts'
 export default {
     // eslint-disable-next-line vue/multi-word-component-names
     name: 'Sidebar',
-    props: ['detail'],
     data() {
       return {
         activeIndex: '1',
