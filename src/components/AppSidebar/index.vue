@@ -124,17 +124,14 @@
         :visible.sync="generalDiscountModal"
         width="30%"
         center>
-        <div class="d-flex justify-between" style="padding: 5px 0;">
-          <p>Труба КАНАЛИЗАЦИЯ BASE Ø110</p> 
-          <p><b>5.7%</b></p>
+        <div class="d-flex justify-between" style="padding: 5px 0;" v-for="item in basket_products" :key="item.id">
+          <h4>{{ item.product_name }}</h4> 
+          <h4><b>0%</b></h4>
         </div>
-        <div class="d-flex justify-between">
-          <p>Насос канализационный погружной</p> 
-          <p><b>0.01%</b></p>
-        </div>
+        
         <div class="d-flex justify-between" style="padding: 5px 0;">
           <p><b>Общая скидка</b></p> 
-          <p><b>0.28%</b></p>
+          <p><b>0%</b></p>
         </div>
         <span slot="footer" class="dialog-footer">
           <el-button @click="generalDiscountModal = false" type="danger">Отменить</el-button>
